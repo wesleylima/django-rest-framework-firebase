@@ -53,8 +53,10 @@ class BaseFirebaseuthentication(BaseAuthentication):
         if not uid:
             msg = _('Invalid payload.')
             raise exceptions.AuthenticationFailed(msg)
-
         try:
+            if 'email_verified' not in payload or ('email_verified' in payload and not payload['email_verified']):
+                msg = _('User email not yet confirmed.')
+                raise exceptions.AuthenticationFailed(msg)
             user = User.objects.get(**{uid_field: uid})
         except User.DoesNotExist:
             if not api_settings.FIREBASE_CREATE_NEW_USER:

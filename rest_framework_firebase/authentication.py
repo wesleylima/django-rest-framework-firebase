@@ -16,7 +16,7 @@ from rest_framework.authentication import (
 cred = credentials.Certificate(api_settings.FIREBASE_ACCOUNT_KEY_FILE)
 firebase = firebase_admin.initialize_app(cred)
 
-class BaseFirebaseuthentication(BaseAuthentication):
+class BaseFirebaseAuthentication(BaseAuthentication):
     """
     Token based authentication using firebase.
     """
@@ -87,7 +87,7 @@ class BaseFirebaseuthentication(BaseAuthentication):
         return user
 
 
-class Firebaseuthentication(BaseFirebaseuthentication):
+class FirebaseAuthentication(BaseFirebaseAuthentication):
     """
     Clients should authenticate by passing the token key in the "Authorization"
     HTTP header, prepended with the string specified in the setting

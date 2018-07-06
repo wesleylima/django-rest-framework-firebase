@@ -12,7 +12,7 @@ On your project's `settings.py` add this to the `REST_FRAMEWORK` configuration
 REST_FRAMEWORK = {
   ...
   'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework_firebase_auth.authentication.Firebaseuthentication',
+    'rest_framework_firebase.authentication.FirebaseAuthentication',
   )
   ...
 }

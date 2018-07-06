@@ -27,3 +27,9 @@ FIREBASE_AUTH = {
     'FIREBASE_ACCOUNT_KEY_FILE': 'path_to_your_credentials.json',
 }
 ```
+
+## Publishing
+
+`python setup.py sdist`
+
+`twine upload dist/*`

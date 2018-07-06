@@ -76,6 +76,7 @@ class BaseFirebaseuthentication(BaseAuthentication):
                     'email':user.email
                 }
                 u = User(**fields)
+                u.is_active = True
                 u.save()
                 return u
 

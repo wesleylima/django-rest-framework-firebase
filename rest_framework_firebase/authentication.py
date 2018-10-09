@@ -12,9 +12,13 @@ from rest_framework.authentication import (
     BaseAuthentication, get_authorization_header
 )
 
-# TODO: Support entering the keys individually later
-cred = credentials.Certificate(api_settings.FIREBASE_ACCOUNT_KEY_FILE)
-firebase = firebase_admin.initialize_app(cred)
+if api_settings.FIREBASE_ACCOUNT_KEY_FILE:
+    creds = credentials.Certificate(api_settings.FIREBASE_ACCOUNT_KEY_FILE)
+else:
+    creds = credentials.Certificate(api_settings.FIREBASE_CREDENTIALS)
+
+firebase = firebase_admin.initialize_app(creds)
+
 
 class BaseFirebaseAuthentication(BaseAuthentication):
     """

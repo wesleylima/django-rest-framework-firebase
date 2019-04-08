@@ -6,7 +6,7 @@ from rest_framework import exceptions
 from firebase_admin import auth
 from django.utils.translation import ugettext as _
 from django.contrib.auth import get_user_model
-
+from django.db import IntegrityError
 
 from rest_framework.authentication import (
     BaseAuthentication, get_authorization_header
@@ -76,12 +76,16 @@ class BaseFirebaseAuthentication(BaseAuthentication):
                 user.save()
             except User.DoesNotExist:
                 fields = {
-                    uid_field : uid,
-                    'email':user.email
+                    uid_field: uid,
+                    'email': user.email
                 }
-                u = User(**fields)
-                u.is_active = True
-                u.save()
+                try:
+                    u = User(**fields)
+                    u.is_active = True
+                    u.save()
+                except IntegrityError:
+                    # The user has already been created from a concurrent request
+                    u = User.objects.get(**fields)
                 return u
 
         if not user.is_active:

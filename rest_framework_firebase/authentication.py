@@ -14,9 +14,10 @@ from rest_framework.authentication import (
 
 if api_settings.FIREBASE_ACCOUNT_KEY_FILE:
     creds = credentials.Certificate(api_settings.FIREBASE_ACCOUNT_KEY_FILE)
-else:
+elif api_settings.FIREBASE_CREDENTIALS:
     creds = credentials.Certificate(api_settings.FIREBASE_CREDENTIALS)
-
+else:
+    creds = None
 firebase = firebase_admin.initialize_app(creds)
 
 

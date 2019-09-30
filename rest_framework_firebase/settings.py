@@ -25,6 +25,8 @@ DEFAULTS = {
 
     'FIREBASE_AUTH_HEADER_PREFIX': "JWT",
     'FIREBASE_UID_FIELD': 'username',
+    # Indicates if FB is set to allow one account per email (the default)
+    'FIREBASE_UNIQUE_EMAIL': True
 }
 
 # List of settings that may be in string import notation.
